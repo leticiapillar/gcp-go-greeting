@@ -28,3 +28,15 @@ Acesse o link: http://localhost:8000/, aparecerá no browser "Code.education Roc
 PASS
 ok  	command-line-arguments	1.027s
 ``` 
+
+***Gerando uma imagem Docker***
+```
+# Gerando uma imagem docker
+> docker build -t leticiapillar/go-greeting .
+
+# Executando a imagem docker
+> docker run -d -p 8000:8000 leticiapillar/go-greeting
+```
+
+Acesse o link: http://localhost:8000/, aparecerá no browser "Code.education Rocks!"
+
