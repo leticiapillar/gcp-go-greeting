@@ -1,0 +1,9 @@
+steps:
+
+- id: "Go mod init"
+  name: 'golang'
+  args: ['go', 'mod', 'init', 'github.com/leticiapillar/gcp-go-greeting']
+
+- id: "Go test"
+  name: 'golang'
+  args: ['go', 'test', '-v', 'src/greeting/main_test.go', 'src/greeting/main.go']
