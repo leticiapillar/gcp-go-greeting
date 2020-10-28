@@ -15,7 +15,8 @@ spec:
     spec:
       containers:
       - name: application
-        image: leticiapillar/go-greeting
+        image: gcr.io/code-education-course-293910/go-greeting:latest
+        # image: gcr.io/$PROJECT_ID/go-greeting:latest
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 8000

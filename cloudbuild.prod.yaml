@@ -1,0 +1,36 @@
+steps:
+
+- id: "Go mod init"
+  name: 'golang'
+  args: ['go', 'mod', 'init', 'github.com/leticiapillar/gcp-go-greeting']
+
+- id: "Go test"
+  name: 'golang'
+  args: ['go', 'test', '-v', 'src/greeting/main_test.go', 'src/greeting/main.go']
+
+- id: "Building image Go Greeting PROD"
+  name: 'docker'
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/go-greeting:$SHORT_SHA', '-f', 'Dockerfile.prod', '.']
+
+- id: "Push image Go Greeting PROD"
+  name: 'docker'
+  args: ['push', 'gcr.io/$PROJECT_ID/go-greeting:$SHORT_SHA']
+
+- id: "Adjust k8s deployment file"
+  name: 'gcr.io/cloud-builders/gcloud'
+  entrypoint: '/bin/sh'
+  args:
+    - '-c'
+    - |
+      sed 's#img-app-deployment#gcr.io/$PROJECT_ID/go-greeting:$SHORT_SHA#g' go-deployment.yaml > go-deployment-gcp.yaml;
+      cat go-deployment-gcp.yaml;
+
+# - id: "Deploy in k8s"
+#   name: 'gcr.io/cloud-builders/kubectl'
+#   args: 
+#     - 'apply'
+#     - '-f'
+#     - 'go-deployment-gcp.yaml'
+#   env:
+#   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
+#   - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'

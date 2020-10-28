@@ -2,7 +2,11 @@
 
 Crie um aplicativo Go que disponibilize um servidor web na porta 8000 que quando acessado seja exibido em HTML (em negrito) Code.education Rocks!
 
-Configuração de uma CI no GCP - Google Cloud Plataform
+Configuração de uma CI, CD e Deploy no k8s no GCP - Google Cloud Plataform
+
+As regras do processo são:
+- Quando qualquer push ou uma PR for relizada no Github em um branch diferente do Master, o processo de CI tem que ser executado.
+- Quando um merge ou um push entrarem no branch Master, o processo de CI/CD deve ser chamado, fazendo assim o deploy de forma automática no Kubernetes.
 
 ***Rodando o main***
 ```
